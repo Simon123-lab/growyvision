@@ -1,0 +1,114 @@
+{% extends 'user_base.html' %}
+{% load static %}
+
+{% block style %}
+.robot_confirmation{
+    width: 420px;
+    height: 60px;
+    margin: 0 auto;
+    color: #222f63;
+    background: #baccd6;
+  }
+  .help-text{
+    font-size: 12px;
+  }
+  .wrapper{
+    text-align: center;
+    margin-top: 120px;
+  }
+  .wrapper h6{
+    color: #7951c9;
+    padding-bottom: 20px;
+  }
+  #msg{
+    font-size: 14px;
+  }
+{% endblock style %}
+
+{% block content %} 
+
+<div class="container wrapper">
+
+  <!-- display progress message -->
+  {% for message in messages %}
+    <h6> {{message}} </h6>
+  {% endfor %}
+
+<div class="card">
+  <div class="card-header text-center">
+    <h5>Task Confirmation - Entry For Task {{system}}</h5>
+  </div>
+  <div class="card-body text-center">
+    <p class="card-text"><span class="text-danger">Enter numbers only!</span> you see in below captcha to confirm your task. </p>
+    <div class="robot_confirmation">
+      <p class="pt-3">x d {{system}} h t</p>
+    </div><br>
+    <form id="robot_confirmation_form" method="post" action="">
+      {% csrf_token %}
+      <div id="hideme">
+        {{form.entry_code}}
+      </div>
+       <br>
+      <div class="form-group mt-3">
+        <button id="validate" type="submit" onclick="check()" class="btn btn-info">Confirm</button>
+        <input id="enableBtn" type="submit" class="btn btn-info" disabled="disabled" value="Submit">
+      </div>
+      <p id="msg" class="text-success"></p>
+      <p id="Fmsg" class="text-danger"></p>
+    </form>
+  </div>
+</div>
+
+<script>
+
+</script>
+   
+{% endblock content %}
+
+{% block script %}
+
+    $(document).ready(function (){
+      $('button').click(function (e){
+        e.preventDefault()
+      });
+    });
+
+    function disable(){
+      var hide = document.querySelector('#hideme');
+
+      hide.style.pointerEvents = "none";
+    }
+
+    function check(){
+      var input = document.querySelector('#id_entry_code');
+      var inputVal = document.querySelector('#id_entry_code').value;
+      var enableBtn = document.querySelector('#enableBtn');
+      var successMsg = document.querySelector('#msg');
+      var failMsg = document.querySelector('#Fmsg');
+      var hide = document.querySelector('#hideme');
+
+      if(inputVal == {{system}} ){
+        successMsg.innerText="Code match! Click on submit now.."
+        enableBtn.removeAttribute('disabled','disabled')
+        hide.style.pointerEvents = "none";
+       
+        console.log("success");
+      }
+      else{
+        failMsg.innerText="Code didn't match! Enter correctly (only number).."
+        console.log("code do not match!");
+      }
+    }
+
+
+
+
+
+a = 1;
+if(a == {{system}} ){
+  console.log("equal");
+}else{
+  console.log("not working");
+}
+
+{% endblock script %}

@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<!-- START PACKAGES -->
+    
+<div class="container-fluid pb-5" id="packages">
+    <div class="d-flex justify-content-center">
+      <h1 class="text-center mt-5 pt-5" style="color: #7951c9; font-size: 2rem; font-weight: bold;">HOT SUBSCRIPTIONS</h1>
+    </div>
+  
+    <div class="container-fluid mt-5 pt-5">
+      <div class="row">
+        {% for d in data %}
+          <div class="col-lg-4 mb-3 d-flex justify-content-center">
+           
+             <div class="card" style="width: 20rem; background-color: #7951c9;">
+  
+              <div class="card-body">
+                <h5 class="card-title text-center mt-2" style="color: white; font-weight: bold; font-size: 10mm;">{{d.package_name}}</h5>
+                <p class="card-text text-center" style="font-size: 5mm; font-weight: bold; color: #FCEC60;">{{d.package_price}}</p>
+                <p class="card-text text-center" style="font-size: 5mm;  color: white;">{{d.like}} <br>{{d.follows}} <br>{{d.subscribers}}
+               </p>
+               <p class="card-text text-center" style="font-size: 5mm;  color: #82FAE4;">read more
+               </p>
+               <p class="card-text text-center" style="font-size: 5mm; font-weight: bold; color: #FCEC60;">{{d.package_timeperiod}}</p>
+  
+                <div class="d-flex justify-content-center">
+                  <a href="/subscribe" class="btn mt-4 " style="color: #7951c9; font-weight: bold; background-color: white;">Subscribe</a>
+                </div>
+  
+              </div>
+               </div>
+               
+          </div>
+          {% endfor %}
+         
+      </div>
+  </div>
+  </div>
+  <!-- END PACKAGES -->
+
+   <!-- Footer -->
+<footer class="page-footer font-small unique-color-dark  " style="background-color: #7951c9;">
+
+    <div style="background-color: #7951c9;">
+      <div class="container">
+  
+        <!-- Grid row-->
+        <div class="row py-4 d-flex align-items-center">
+  
+          <!-- Grid column -->
+          <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+            <h6 class="mb-0 text-white">Get Connected With Us On Social Networks!</h6>
+          </div>
+          <!-- Grid column -->
+  
+          <!-- Grid column -->
+          <div class="col-md-6 col-lg-7 text-center text-md-right">
+  
+            <!-- Facebook -->
+            <a class="fb-ic">
+              <i class="fa fa-facebook-f text-white mr-4"> </i>
+            </a>
+            <!-- Twitter -->
+            <a class="tw-ic">
+              <i class="fa fa-twitter text-white mr-4"> </i>
+            </a>
+           
+         
+            <!--Instagram-->
+            <a class="ins-ic">
+              <i class="fa fa-instagram text-white"> </i>
+            </a>
+  
+          </div>
+          <!-- Grid column -->
+  
+        </div>
+        <!-- Grid row-->
+  
+      </div>
+    </div>
+    <hr style="background-color: white;">
+    <!-- Footer Links -->
+    <div class="container text-center text-md-left mt-5" style="background-color: #7951c9;">
+  
+      <!-- Grid row -->
+      <div class="row mt-3">
+  
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-6 col-xl-3 mx-auto mb-4">
+  
+          <!-- Content -->
+          <h6 class="text-uppercase text-white font-weight-bold">Growy</h6>
+          <hr class="accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: white;">
+          <p class="text-white">Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
+            consectetur
+            adipisicing elit.</p>
+  
+        </div>
+        <!-- Grid column -->
+        
+  
+        <!-- Grid column -->
+        <div class="col-md-4 col-lg-6 col-xl-3 mx-auto mb-md-0 mb-4">
+  
+          <!-- Links -->
+          <h6 class="text-uppercase font-weight-bold text-white">Contact</h6>
+          <hr class=" accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: white;">
+          <p class="text-white">
+            <i class="fa fa-home mr-3 text-white"></i> Karachi, Pakistan</p>
+          <p class="text-white">
+            <i class="fa fa-envelope  text-white mr-3"></i> Growyplatform@gmail.com</p>
+          <p class="text-white">
+            <i class="fa fa-phone text-white mr-3"></i>   &nbsp;090078601</p>
+          <p class="text-white">
+            <i class="fa fa-print text-white mr-3"></i> &nbsp; 3485648573</p>
+  
+        </div>
+        <!-- Grid column -->
+  
+      </div>
+      <!-- Grid row -->
+  
+    </div>
+    <!-- Footer Links -->
+  
+
+    <div class=" text-center py-3">
+      <a class="text-white"> Growyplatform.com</a>
+    </div>
+
+  
+  </footer>
+  <!-- Footer -->
+{% endblock content %}  

@@ -1,0 +1,80 @@
+{% extends 'user_base.html' %} {% load static %} {% block Utitle %}Watch Videos{% endblock Utitle %} {% block head %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Stylish&display=swap" rel="stylesheet"> {% endblock head %} {% block style %} .codeBox{ background: #F2ECFF; color: green; width: 100%; height: auto; font-family: 'Stylish', sans-serif; font-size: 20px; font-style: italic; text-align: center; } .allow_events{ pointer-events: all; } .robot_confirmation{
+width: 420px; height: 60px; margin: 0 auto; color: #222f63; background: #baccd6; } .help-text{ font-size: 12px; } {% endblock style %} {% block content %}
+
+<div class="container">
+    <div class="row mt-5">
+
+        {% for v in videos %}
+
+        <div class="col-lg-4" id="main_cont">
+            <div class="card">
+                <div class="card-header">
+                    Featured Task{{v.assign_id}}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Watch Video - <span class="text-success">0.75 PKR</span> </h5>
+                    <p class="card-text">Watch a video for 30 seconds and earn Rs 0.75!
+                        <br/><span class="text-danger">If you leave the page before 30 seconds, the amount will not be count.</span></p>
+                    <div class="section1">
+                        <button type="button" data-backdrop="static" class="btn btn-primary callTimer" onclick="runTimer()" data-toggle="modal" data-target="#m">Start Task</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="m" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Do not leave the page! {{user.username}} </h5>
+                        <h5 id="timer">{{v.assign_id}} </h5>
+                    </div>
+                    <div class="modal-body video text-center" style="pointer-events: none;">
+                        <iframe width="420" height="315" src="{{v.link}}" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="modal-footer">
+                        <form action="{% url 'confirm_task' %}" method="post" id="systemform">
+                            {% csrf_token %}
+                            <button type="submit" id="conBtn" name="system" value="{{v.assign_id}}" form="systemform" disabled="disabled" class="btn btn-success">Confirm Task</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+        <script>
+            var x;
+            var time = 0;
+            var enableBtn = document.querySelector('#conBtn');
+            var displayTime = document.querySelector('#timer');
+            var vidTouch = document.querySelector('.video');
+
+            function runTimer() {
+                x = setInterval(function() {
+                    time++;
+                    displayTime.innerHTML = time;
+
+                    if (time == 3) {
+                        clearInterval(x);
+                        enableBtn.removeAttribute('disabled', 'disabled');
+                        vidTouch.style.pointerEvents = 'all';
+                    }
+                }, 1000)
+            }
+        </script>
+
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,142 @@
+{% extends 'client_base.html' %} {% load static %} {% block Ctitle %}Place Order{% endblock Ctitle %} {% block style %} html,body { height: 100%; } .global-container{ height:100%; display: flex; align-items: center; justify-content: center; background-color:
+#f5f5f5; } form{ padding-top: 10px; font-size: 14px; margin-top: 30px; } .card-title{ font-weight:300; } .btn{ font-size: 14px; margin-top:20px; } .login-form{ width:400px; margin:20px; } .sign-up{ text-align:center; padding:20px 0 0; } .alert{ margin-bottom:-30px;
+font-size: 13px; margin-top:20px; } {% endblock style %} {% block clientContent %}
+
+<!-- user creation form -->
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-6 d-flex justify-content-center">
+            <div class="card mb-5  login-form">
+                <div class="card-body ">
+                    <h4 class="card-title  text-center" style="font-weight: bold; color: #7951c9;">Place Order</h4>
+                    <div class="card-text">
+                        {% for message in messages %}
+                        <div class="alert text-center text-capitalize" style="background: #F2ECFF; color:#7951c9" role="alert">
+                            {{message}}
+                        </div>
+                        {% endfor %}
+
+                        <form method="POST" action="" enctype="multipart/form-data">
+                            {% csrf_token %}
+
+                            <div class="form-group">
+                                <label for="username">{{form.url.label}} </label> {{form.url}}
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">{{form.category.label}} </label> {{form.category}}
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">{{form.quantity.label}} </label> {{form.quantity}}
+                                <button data-toggle="popover" class="bg-transparent" title="Select Quantity According To following" data-content="For Views: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 50 Views amount is 100RS"
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; style="float:right;font-size:12px; border:none; color: #7951c9;">Calculate Amount</button>
+                            </div><br>
+
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Account Name</label> {{form.id_name}}
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">{{form.phone_no.label}} </label> {{form.phone_no}}
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Screenshot</label> {{form.img}}
+                            </div>
+
+                            <!-- <p style="float:left;font-size:12px;" id="chkvalid"></p>
+								<p style="float:left;font-size:12px; color:#7951c9;">Please mark the checkbox correctly! You cannot change 
+									the selection  again..
+								</p> -->
+
+                            <input type="submit" class="btn btn-primary btn-block" style="background: #7951c9;" value="Submit">
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 d-flex justify-content-center">
+            <div class="card login-form mb-5" style="background-color: orange;">
+                <div class="card-body">
+                    <h4 class="card-title text-center" style="font-weight: bold; color: #ffff;">Important Highlights</h4>
+                    <ul>
+                        <li style="color: white;">
+                            <strong>URL:</strong> Enter youtube's video embed url or post,page url.
+                        </li>
+                        <li style="color: white; ">
+                            <strong>Account name:</strong> The name which is registered with the payment method you will used.
+                        </li>
+                        <li style="color: white; ">
+                            <strong>Screenshot:</strong> Upload screenshot of the recipt you get after sucessfull transactions either through jazzcash,easypaisa or bank account. <span style="color: red;">Wrong upload will lead to the cancellation your order</span>
+                        </li>
+
+                    </ul>
+                    <ul>
+                        <p style="color: white; ">Transfer payment to the following accounts</p>
+                        <li style="color: white; ">
+                            <strong>Easypaisa:</strong> <br> Account name: Sawera <br>Account number 0323-9845673
+                        </li>
+                        <li style="color: white;">
+                            <strong>Jazzcash:</strong> <br> Account name: sheryar <br>Account number 0323-7654327
+                        </li>
+                        <li style="color: white;">
+                            <strong>Bank Al habib:</strong> <br> Account name: Shehroz <br>Account number 48938483473438
+                        </li>
+                    </ul>
+                    <p class="text-white text-center">Ammount</p>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <ul style="color: white;">
+                                <p> For Views:
+                                </p>
+                                <li>50 views = 100RS</li>
+                                <li>100 views = 200RS</li>
+                                <li>300 views = 600RS</li>
+                                <li>700 views = 1400RS</li>
+                                <li>1000 views = 2000RS</li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6">
+                            <ul style="color: white;">
+                                <p> For likes/Follows:
+                                </p>
+                                <li>50 like/follow = 60RS</li>
+                                <li>100 like/follow = 120RS</li>
+                                <li>300 like/follow = 360RS</li>
+                                <li>700 like/follow = 840RS</li>
+                                <li>1000 like/follow = 1200RS</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script>
+    var form_fields = document.getElementsByTagName('input')
+    form_fields[1].className = 'form-control'
+    form_fields[2].className = 'form-control'
+    form_fields[3].className = 'form-control'
+
+    var select_fields = document.getElementsByTagName('select')
+    select_fields[0].className = 'form-control'
+    select_fields[1].className = 'form-control'
+    console.log(select_fields)
+
+    $(document).ready(function() {
+        $('[data-toggle="popover"]').popover({
+            placement: 'top',
+            trigger: 'hover'
+        });
+    });
+</script>
+
+{% endblock clientContent %}
